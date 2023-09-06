@@ -1,4 +1,4 @@
-#### simple shell project ####
+# Simple shell project #
 
 ## Learning Objectives ##
 
