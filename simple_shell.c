@@ -18,7 +18,12 @@ int main(int ac, char **argv)
 		}
 	/*printf ("%s", cmd);*/
 	tokenize_command(cmd, argv);
+	if (strcmp(argv[0], "exit") == 0)
+  	{
+    		exit(0);
+  	}
 	execute_command(argv);
+	free(cmd);
 	}
 return (0);
 }
