@@ -33,26 +33,3 @@ void execute_command(char **args) {
 		printf("Child process exited with status: %d\n", status);
 	}
 }
-
-void run_shell()
-	{
-	char command[MAX_COMMAND_LENGTH];
-	char *args[64];
-
-	while(1)
-	{
-		printf("Shell>$ ");
-		fgets(command, MAX_COMMAND_LENGTH, stdin);
-
-		command[strcspn(command, "\n")] = '\0';
-
-		tokenize_command(command, args);
-
-	if (strcmp(args[0], "exit") == 0)
-	{
-		exit(0);
-	}
-
-	execute_command(args);
-	}
-}

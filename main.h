@@ -12,7 +12,7 @@
 
 void tokenize_command(char *command, char **args);
 void execute_command(char **args);
-void run_shell();
+char *read_cmd();
 
 
 #endif

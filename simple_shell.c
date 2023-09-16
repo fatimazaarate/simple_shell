@@ -1,7 +1,23 @@
 #include "main.h"
 
-int main()
+int main(int ac, char **argv)
 {
-	run_shell();
+	char *cmd = NULL;
+	int status = 0;
+	(void) ac;
+	(void) argv;
+
+	while (1)
+	{
+		cmd = read_cmd();
+		if (cmd == NULL)  /* reach EOF */
+		{
+			if (isatty(STDIN_FILENO))
+				printf ("\n");
+			return(status);
+		}
+	/*printf ("%s", cmd);*/
+	free(cmd);
+	}
 return (0);
 }
