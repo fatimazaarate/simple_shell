@@ -34,25 +34,36 @@ void execute_command(char **args) {
 	}
 }
 
-void run_shell()
-	{
-	char command[MAX_COMMAND_LENGTH];
-	char *args[64];
+void run_shell() {
+    char command[MAX_COMMAND_LENGTH];
+    char *args[64];
+    char *cmd = NULL;
 
-	while(1)
-	{
-		printf("Shell>$ ");
-		fgets(command, MAX_COMMAND_LENGTH, stdin);
+    while(1) {
+        printf("Shell>$ ");
+        fgets(command, MAX_COMMAND_LENGTH, stdin);
 
-		command[strcspn(command, "\n")] = '\0';
+        command[strcspn(command, "\n")] = '\0';
 
-		tokenize_command(command, args);
+        tokenize_command(command, args);
 
-	if (strcmp(args[0], "exit") == 0)
-	{
-		exit(0);
-	}
+        if (strcmp(args[0], "exit") == 0) {
+            exit(0);
+        }
 
-	execute_command(args);
-	}
+        execute_command(args);
+
+        while (1)
+        {
+            cmd = fgets(command, MAX_COMMAND_LENGTH, stdin);
+            if (cmd == NULL)  /* reach EOF */
+            {
+                if (isatty(STDIN_FILENO))
+                    printf ("\n");
+                return;
+            }
+            tokenize_command(cmd, args);
+            execute_command(args);
+        }
+    }
 }
