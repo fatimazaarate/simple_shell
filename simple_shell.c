@@ -17,7 +17,8 @@ int main(int ac, char **argv)
 			return(status);
 		}
 	/*printf ("%s", cmd);*/
-	free(cmd);
+	tokenize_command(cmd, argv);
+	execute_command(argv);
 	}
 return (0);
 }
