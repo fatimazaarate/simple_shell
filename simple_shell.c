@@ -9,7 +9,7 @@ int main(int ac, char **argv)
 	char *del = " \n";
 	int num_tkns = 0;
 	char *tkn;
-	int i, count = 0;
+	int i;
 
 	(void) ac;
 
@@ -62,15 +62,18 @@ int main(int ac, char **argv)
 	}
 	argv[i] = NULL;
 
-	for (count = 0; count < num_tkns - 1; count++)
+	/*for (count = 0; count < num_tkns - 1; count++)
 	{
 		printf("%s\n", argv[count]);
+		free(argv[i]);
+	}*/
+	execmd(argv);
 	}
 
 		free(argv), argv = NULL;
-		free(cmd), cmd = NULL;
 		free(cmd_copy), cmd_copy = NULL;
-	}
+		free(cmd); cmd = NULL;
 
-return (0);
+
+		return (0);
 }

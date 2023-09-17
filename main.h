@@ -10,9 +10,9 @@
 
 #define MAX_COMMAND_LENGTH 1024
 
-void execute_command(char **args);
+
 char *read_cmd();
 char **get_token(char *line);
-
+void execmd(char **arg);
 
 #endif
