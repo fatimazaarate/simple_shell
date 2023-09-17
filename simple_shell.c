@@ -3,13 +3,13 @@
 int main(int ac, char **argv)
 {
 	char *prmpt = "Shell>$ ";
-	char *cmd, *cmd_copy = NULL;
+	char *cmd = NULL, *cmd_copy = NULL;
 	size_t n = 0;
 	ssize_t chars_number;
 	char *del = " \n";
 	int num_tkns = 0;
 	char *tkn;
-	int i;
+	int i, count = 0;
 
 	(void) ac;
 
@@ -51,28 +51,24 @@ int main(int ac, char **argv)
 
 	for (i = 0; tkn != NULL; i++)
 	{
-		argv[i] = malloc(sizeof(char) * strlen(tkn));
-		strcpy(argv[i], tkn);
+		argv[i] = strdup(tkn);
 	
-	/*for (count = 0; count < num_tkns - 1; count ++)
-	{
-		printf ("%s\n", argv[count]);		
-	}*/
 		tkn = strtok(NULL, del);
 	}
 	argv[i] = NULL;
 
-	/*for (count = 0; count < num_tkns - 1; count++)
+	for (count = 0; count < num_tkns - 1; count++)
 	{
 		printf("%s\n", argv[count]);
-		free(argv[i]);
-	}*/
-	execmd(argv);
+		free(argv[count]);
+	}
+	/*execmd(argv);*/
+	free(cmd_copy);
+
 	}
 
 		free(argv), argv = NULL;
-		free(cmd_copy), cmd_copy = NULL;
-		free(cmd); cmd = NULL;
+		free(cmd), cmd = NULL;
 
 
 		return (0);
