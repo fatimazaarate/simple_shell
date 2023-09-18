@@ -15,8 +15,7 @@ char **get_token(char *line)
 	tkn = strtok(line_copy, DL);
 	if (!tkn)
 	{
-		/*free(line), line = NULL;*/
-		free(line);
+		free(line), line = NULL;
 		return (NULL);
 	}
 
@@ -25,12 +24,12 @@ char **get_token(char *line)
 		count++;
 		tkn = strtok(NULL, DL);
 	}
-	free(line_copy);
+	free(line_copy), line_copy = NULL;
 
 	arg = malloc(sizeof(char *) * (count + 1));
 	if(!arg)
 	{
-		/*free(line), line = NULL;*/
+		free(line), line = NULL;
 		return (NULL);
 	}
 
@@ -38,11 +37,11 @@ char **get_token(char *line)
 
 	while(tkn)
 	{
-		arg[i] = tkn;
+		arg[i] = strdup(tkn);
 		tkn = strtok(NULL, DL);
 		i++;
 	}
-	/*free(line), line = NULL;*/
+	free(line), line = NULL;
 	arg[count] = NULL;
 
 	i = 0;
@@ -54,4 +53,6 @@ char **get_token(char *line)
 	}
 
 	return (arg);
+
+
 }

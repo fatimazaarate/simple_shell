@@ -25,11 +25,8 @@ int main( int ac, char **argv)
 		if (args == NULL)
 			continue;
 
-		/*ile (args[i])
-		{
-			printf("%s\n", args[i]);
-			i++;
-		}*/
+		free(cmd);
 		free(args);
-	}	
+	}
+	
 }	
