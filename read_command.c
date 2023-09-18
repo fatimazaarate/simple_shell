@@ -1,6 +1,7 @@
 #include "main.h"
 
-char *read_cmd(void)
+
+char *read_line(void)
 {
 	char *cmd = NULL;
 	size_t n = 0;
@@ -10,7 +11,7 @@ char *read_cmd(void)
 	if (isatty(STDIN_FILENO))
 		write(STDOUT_FILENO, shell, strlen(shell));
 
-	r = getline(&cmd, &n, stdin);
+	r = getline (&cmd, &n, stdin);
 	if (r == -1)
 	{
 		free(cmd);

@@ -1,14 +1,24 @@
 #include "main.h"
 
-void execmd(char **arg)
+/*int execmd(char **cmd, char **argv)
 {
-	char *cmd = NULL;
-
-	if (arg)
+	pid_t kid;
+	int stat;
+	
+	kid = fork();
+	if (kid == 0)
+	(
+		if (execve(cmd[0], cmd, envi) == -1)
+		{
+		perror(argv{0});
+		freearray2D(cmd);
+		exit(0);
+		}
+	)
+	else
 	{
-		cmd = arg[0];
-
-	if (execve(cmd, arg, NULL) == -1)
-		perror("error");
+		waitpid(kid, &stat, 0);
+		freearray2D(cmd);
 	}
-}
+	return(WEXITSTATUS(stat));
+}*/
