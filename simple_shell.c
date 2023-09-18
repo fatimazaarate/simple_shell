@@ -23,6 +23,7 @@ int main(int ac, char **argv)
 		if (chars_number == -1)
 		{
 			printf("\n");
+			free(cmd);
 			return (-1);
 		}
 	/* allocate space for a copy of cmd*/
@@ -31,10 +32,16 @@ int main(int ac, char **argv)
 		return (-1);
 
 	/* copy cmd to cmd_copy */
-	strcpy(cmd_copy, cmd);
+	cmd_copy = strdup(cmd);
 
 	/* parsing*/
-	tkn = strtok(cmd, del);
+	tkn = strtok(cmd_copy, del);
+	
+	if (!tkn)
+	{
+		free(cmd), cmd = NULL;
+		free(cmd_copy), cmd_copy = NULL;
+	}
 	
 	while (tkn)
 	{
@@ -42,19 +49,28 @@ int main(int ac, char **argv)
 		tkn = strtok(NULL, del);
 	}
 	num_tkns++;
+
+	free(cmd_copy), cmd_copy = NULL;
 	
 	/*alocate for argv*/
 	argv = malloc(sizeof(char *) * num_tkns);
+	if (!argv)
+	{
+		free(cmd), cmd = NULL;
+		return (-1);
+	}
 
 	/*alocate space to hold the arr of str*/
-	tkn = strtok(cmd_copy, del);
+	tkn = strtok(cmd, del);
 
 	for (i = 0; tkn != NULL; i++)
 	{
-		argv[i] = strdup(tkn);
+		argv[i] = tkn;
 	
 		tkn = strtok(NULL, del);
 	}
+
+	free(cmd), cmd = NULL;
 	argv[i] = NULL;
 
 	for (count = 0; count < num_tkns - 1; count++)
@@ -62,13 +78,11 @@ int main(int ac, char **argv)
 		printf("%s\n", argv[count]);
 		free(argv[count]);
 	}
-	execmd(argv);
-	free(cmd_copy);
+	/*execmd(argv);*/
+
 
 	}
-
 		free(argv), argv = NULL;
-		free(cmd), cmd = NULL;
 
 
 		return (0);
