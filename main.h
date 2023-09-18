@@ -8,7 +8,7 @@
 #include <sys/wait.h>
 #include <string.h>
 
-#define MAX_COMMAND_LENGTH 1024
+#define DL " \n"
 
 
 char *read_cmd();

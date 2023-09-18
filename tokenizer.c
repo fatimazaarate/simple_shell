@@ -2,7 +2,7 @@
 
 char **get_token(char *line)
 {
-	char *tkn = NULL, *line_copy = NULL, *del = " ";
+	char *tkn = NULL, *line_copy = NULL;
 	char **arg = NULL;
 	int count = 0, i = 0;
 
@@ -12,7 +12,7 @@ char **get_token(char *line)
 
 	line_copy = strdup(line);
 
-	tkn = strtok(line_copy, del);
+	tkn = strtok(line_copy, DL);
 	if (!tkn)
 	{
 		/*free(line), line = NULL;*/
@@ -23,7 +23,7 @@ char **get_token(char *line)
 	while (tkn)
 	{
 		count++;
-		tkn = strtok(NULL, del);
+		tkn = strtok(NULL, DL);
 	}
 	free(line_copy);
 
@@ -34,12 +34,12 @@ char **get_token(char *line)
 		return (NULL);
 	}
 
-	tkn = strtok(line, del);
+	tkn = strtok(line, DL);
 
 	while(tkn)
 	{
 		arg[i] = tkn;
-		tkn = strtok(NULL, del);
+		tkn = strtok(NULL, DL);
 		i++;
 	}
 	/*free(line), line = NULL;*/
