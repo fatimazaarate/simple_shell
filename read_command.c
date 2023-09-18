@@ -17,6 +17,5 @@ char *read_line(void)
 		free(cmd);
 		return (NULL);
 	}
-
 	return (cmd);
 }
