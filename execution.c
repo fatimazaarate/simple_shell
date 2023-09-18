@@ -1,24 +1,41 @@
 #include "main.h"
 
-/*int execmd(char **cmd, char **argv)
+void free_cmd(char **cmd)
 {
-	pid_t kid;
-	int stat;
+	int j;
+
+	if (cmd == NULL)
+		return;
+
+	for (j = 0; cmd[j]; j++)
+	{
+		free(cmd[j]);
+		cmd[j] = NULL;
+	}
+
+	free(cmd), cmd = NULL;
+}
+
+
+int execmd(char **cmd, char **argv)
+{
+	pid_t ch;
+	int status;
 	
-	kid = fork();
-	if (kid == 0)
-	(
-		if (execve(cmd[0], cmd, envi) == -1)
+	ch = fork();
+	if (ch == 0)
+	{
+		if (execve(cmd[0], cmd, environ) == -1)
 		{
-		perror(argv{0});
-		freearray2D(cmd);
-		exit(0);
+			perror(argv[0]);
+			free_cmd(cmd);
+			exit(0);
 		}
-	)
+	}
 	else
 	{
-		waitpid(kid, &stat, 0);
-		freearray2D(cmd);
+		waitpid(ch, &status, 0);
+		free_cmd(cmd);
 	}
-	return(WEXITSTATUS(stat));
-}*/
+	return(WEXITSTATUS(status));
+}

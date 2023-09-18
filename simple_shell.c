@@ -4,10 +4,9 @@ int main(int ac, char **argv)
 {
 	char *ln = NULL;
 	char **cmd = NULL;
-	int stat = 0, i;
+	int stat = 0;
 
 	(void) ac;
-	(void) argv;
 	
 	while(1)
 	{
@@ -22,12 +21,14 @@ int main(int ac, char **argv)
 		if (!cmd)
 			continue;
 		
-		for (i = 0; cmd[i]; i++)
+		/*for (i = 0; cmd[i]; i++)
 		{
 			printf("%s\n", cmd[i]);
 			free(cmd[i]), cmd[i] = NULL;
 		}
-		free(cmd), cmd = NULL;
+		free(cmd), cmd = NULL;*/
+
+		stat = execmd(cmd, argv);
 	}
 }
 
