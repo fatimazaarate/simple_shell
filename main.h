@@ -11,9 +11,8 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-#define RL_BUFSIZE 1024
 #define DELIM " \t\n"
-#define MAX_COMMAND_LENGTH 1024
+
 
 extern char **environ;
 
