@@ -11,7 +11,7 @@ char *read_line(void)
 	if (isatty(STDIN_FILENO))
 		write(STDOUT_FILENO, shell, strlen(shell));
 
-	r = getline (&cmd, &n, stdin);
+	r = getline(&cmd, &n, stdin);
 	if (r == -1)
 	{
 		free(cmd);

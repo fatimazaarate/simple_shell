@@ -11,11 +11,9 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-#define RL_BUFSIZE 1024
 #define DELIM " \t\n"
-#define MAX_COMMAND_LENGTH 1024
 
-extern char env;
+extern char **environ;
 
 char *_strdup(char *str);
 int _strcmp(const char *s1, const char *s2);
@@ -24,8 +22,9 @@ char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, const char *src);
 
 char *read_line(void);
-char *read_cmd();
 char **get_token(char *line);
-void execmd(char **arg);
+void faos(char **arr);
+int execmd(char **cmd, char **argv);
+
 
 #endif

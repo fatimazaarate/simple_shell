@@ -11,14 +11,14 @@ char **get_token(char *line)
 		return (NULL);
 
 	line_copy = _strdup(line);
-    tkn = strtok(line_copy, DELIM);
-    if (tkn == NULL)
-    {
-        free(line), line = NULL;
-        free(line_copy), line_copy = NULL;
-        return (NULL);
-    }
-	
+	tkn = strtok(line_copy, DELIM);
+	if (tkn == NULL)
+	{
+		free(line), line = NULL;
+		free(line_copy), line_copy = NULL;
+		return (NULL);
+	}
+
 	while (tkn)
 	{
 		count++;
@@ -27,21 +27,21 @@ char **get_token(char *line)
 	free(line_copy), line_copy = NULL;
 
 	arg = malloc(sizeof(char *) * (count + 1));
-    if (!arg)
-    {
-        free(line), line = NULL;
-        return(NULL);
-    }
+	if (!arg)
+	{
+		free(line), line = NULL;
+		return (NULL);
+	}
 	tkn = strtok(line, DELIM);
 
 	while (tkn)
 	{
 		arg[i] = _strdup(tkn);
 		tkn = strtok(NULL, DELIM);
-        i++;
+		i++;
 	}
-    free(line), line_copy = NULL;
-    arg[i] = NULL;
-	    
-    return (arg);
+	free(line), line_copy = NULL;
+	arg[i] = NULL;
+
+	return (arg);
 }
