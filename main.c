@@ -4,7 +4,7 @@ int main( int ac, char **argv)
 {
 	char *cmd;
 	char **args = NULL;
-	int status = 0, i = 0;
+	int status = 0;
 
 	(void)ac;
 	(void)argv;
@@ -25,11 +25,11 @@ int main( int ac, char **argv)
 		if (args == NULL)
 			continue;
 
-		while (args[i])
+		/*ile (args[i])
 		{
 			printf("%s\n", args[i]);
 			i++;
-		}
+		}*/
 		free(args);
-	}
+	}	
 }	

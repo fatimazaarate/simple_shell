@@ -45,13 +45,13 @@ char **get_token(char *line)
 	/*free(line), line = NULL;*/
 	arg[count] = NULL;
 
-	/*i = 0;
+	i = 0;
 
 	while (arg[i])
 	{
 		printf("%s\n", arg[i]);
 		i++;
-	}*/
+	}
 
 	return (arg);
 }
