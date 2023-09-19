@@ -24,11 +24,12 @@ char *_strdup(char *str)
 	if (strdp == 0)
 	return (NULL);
 
-	for (j = 0; j <= i; j++)
+	for (j = 0; j < i; j++)
 	strdp[j] = str[j];
 
-	return (strdp);
+	strdp[j] = '\0';
 
+	return (strdp);
 }
 
 int _strcmp(const char *s1, const char *s2)

@@ -1,15 +1,20 @@
 #include "main.h"
 
+/**
+* get_token - function that tokenize a string into an array of tokens
+* @line: the command to be tokenized
+*
+* Return: array of tokens
+*/
+
 char **get_token(char *line)
 {
 	char *tkn = NULL, *line_copy = NULL;
 	char **arg = NULL;
 	int count = 0, i = 0;
 
-
 	if (line == NULL)
 		return (NULL);
-
 	line_copy = _strdup(line);
 	tkn = strtok(line_copy, DELIM);
 	if (tkn == NULL)
@@ -25,7 +30,6 @@ char **get_token(char *line)
 		tkn = strtok(NULL, DELIM);
 	}
 	free(line_copy), line_copy = NULL;
-
 	arg = malloc(sizeof(char *) * (count + 1));
 	if (!arg)
 	{
@@ -33,7 +37,6 @@ char **get_token(char *line)
 		return (NULL);
 	}
 	tkn = strtok(line, DELIM);
-
 	while (tkn)
 	{
 		arg[i] = _strdup(tkn);
@@ -42,6 +45,5 @@ char **get_token(char *line)
 	}
 	free(line), line_copy = NULL;
 	arg[i] = NULL;
-
 	return (arg);
 }

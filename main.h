@@ -23,8 +23,9 @@ char *_strcat(char *dest, const char *src);
 
 char *read_line(void);
 char **get_token(char *line);
-void faos(char **arr);
 int execmd(char **cmd, char **argv);
-
+void free_cmd(char **cmd);
+char *_getenv(const char *name);
+char *_getpath(char *command);
 
 #endif

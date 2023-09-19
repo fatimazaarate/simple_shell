@@ -1,5 +1,13 @@
 #include "main.h"
 
+/**
+* main - Entry point
+* @ac: number of arguments
+* @argv: array of arguments
+*
+* Return: exit status
+*/
+
 int main(int ac, char **argv)
 {
 	char *ln = NULL;
@@ -20,7 +28,8 @@ int main(int ac, char **argv)
 		if (!cmd)
 			continue;
 
-		stat = execmd(cmd, argv);
 
+		stat = execmd(cmd, argv);
 	}
 }
+
