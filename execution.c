@@ -24,6 +24,7 @@ void free_cmd(char **cmd)
 void _printerror(char *name, char *cmd, int ind)
 {
 	char *ind;
+	char msg;
 
 	ind = _itoi(ind)
 	write(STDERR_FILENO, name, _strlen(name));
@@ -31,7 +32,7 @@ void _printerror(char *name, char *cmd, int ind)
 	write(STDERR_FILENO, ind, _strlen(ind));
 	write(STDERR_FILENO, ": ", 2));
 	write(STDERR_FILENO, cmd, _strlen(cmd));
-	write(STDERR_FILENO, mssg, _strlen(mssg));
+	write(STDERR_FILENO, msg, _strlen(msg));
 }
 
 
