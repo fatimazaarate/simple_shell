@@ -21,7 +21,8 @@ int main(int ac, char **argv)
 		if (ln == NULL)
 		{
 			if (isatty(STDIN_FILENO))
-				write(STDERR_FILENO, "\n", 1);
+				write(STDOUT_FILENO, "\n", 1);
+			free(ln), ln = NULL;
 			return (stat);
 		}
 		idx++;

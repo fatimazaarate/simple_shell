@@ -43,7 +43,7 @@ char **get_token(char *line)
 		tkn = strtok(NULL, DELIM);
 		i++;
 	}
-	free(line), line_copy = NULL;
+	free(line), line = NULL;
 	arg[i] = NULL;
 	return (arg);
 }

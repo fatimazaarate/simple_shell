@@ -28,15 +28,6 @@ char *_strdup(char *str)
 	return (dup);
 }
 
-int _strcmp(const char *s1, const char *s2)
-{
-	while (*s1 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return *(unsigned char *)s1 - *(unsigned char *)s2;
-}
 
 int _strlen(const char *s)
 {
@@ -58,16 +49,15 @@ int _strlen(const char *s)
 
 char *_strcpy(char *dest, char *src)
 {
-	char *ptr = dest;
+	int i = 0;
 
-	while (*src != '\0')
+	while (src[i])
 	{
-		*dest = *src;
-		dest++;
-		src++;
+		dest[i] = src[i];
+		i++;
 	}
-	*dest = '\0';
-	return (ptr);
+	dest[i] = '\0';
+	return (dest);
 }
 
 char *_strcat(char *dest, const char *src)
@@ -85,26 +75,6 @@ char *_strcat(char *dest, const char *src)
 	return (p);
 }
 
-char *_itoa(int n)
-{
-	char buffer [20];
-	int i = 0;
-
-	if (n == 0)
-		buffer[i++] = '0';
-	else
-	{
-		while (n > 0)
-		{
-			buffer[i++] = (n % 10) + '0';
-			n /= 10;
-		}
-	}
-	buffer[i] = '\0';
-	reverse_string(buffer, i);
-	return(_strdup(buffer));
-}
-
 void reverse_string(char *str, int len)
 {
 	char tmp;
@@ -120,4 +90,20 @@ void reverse_string(char *str, int len)
 	}
 
 	
+}
+
+int _strcmp(char *s1, char *s2)
+{
+	int cmp;
+
+	cmp = (int)*s1 - (int)*s2;
+	while (*s1)
+	{
+		if (*s1 != *s2)
+			break;
+		s1++;
+		s2++;
+		cmp = (int)*s1 - (int)*s2;
+	}
+	return (cmp);
 }

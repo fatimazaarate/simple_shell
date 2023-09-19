@@ -1,17 +1,25 @@
 #include "main.h"
 
 
-char *_getenv(const char *name)
+char *_getenv(char *name)
 {
-	extern char **environ;
+	char *tmp, *ky, *val, *env;
 	int i = 0;
-	while (environ[i] != NULL)
+
+	while (environ[i])
 	{
-		if (strncmp(name, environ[i], strlen(name)) == 0)
+		tmp = _strdup(environ[i]);
+		ky = strtok(tmp,"=");
+
+		if (_strcmp(ky, name) == 0)
 		{
-			return environ[i] + strlen(name) + 1;
+			val = strtok(NULL, "\n");
+			env = _strdup(val);
+			free(tmp);
+			return (env);
 		}
+		free(tmp), tmp = NULL;
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }

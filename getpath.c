@@ -1,42 +1,43 @@
 #include "main.h"
 
+
 char *_getpath(char *command)
 {
-	char *path = getenv("PATH");
-	char *token;
-	int i;
-	 struct stat st;
-	char *full_path = malloc(sizeof(char) * (strlen(command) + 1 + 256));
-		
+	char *path, *fcmd, *cpath;
+	struct stat st;
+	int i = 0;
 
-	if (path == NULL || full_path == NULL)
+	while (command[i])
 	{
-		return NULL;
-	}
-
-	for (i = 0; command[i]; i++) /*to handle absolute path /bin/ls */
-	{
-		if (command[i] == '/')
+		if (command [i] == '/')
 		{
 			if (stat(command, &st) == 0)
-			return (_strdup(command));
+				return (_strdup(command));
+			return (NULL);
+		}
+		i++;
+	}
+	path = _getenv("PATH");
+	if (!path)
 		return (NULL);
+	cpath = strtok(path, ":");	
+	while (cpath)
+	{
+		fcmd = malloc(_strlen(cpath) + _strlen(command) + 2);
+		if (fcmd)
+		{
+			_strcpy(fcmd, cpath);
+			_strcat(fcmd, "/");
+			_strcat(fcmd, command);
+			if (stat(fcmd, &st) == 0)
+			{
+				free(path);
+				return (fcmd);
+			}
+			free(fcmd), fcmd = NULL;
+			cpath = strtok(NULL, ":");
 		}
 	}
-	if (!path)   /* to handle unset PATH */
-		return (NULL);
-
-	token = strtok(path, ":");
-	while (token != NULL)
-    {
-		sprintf(full_path, "%s/%s", token, command);
-		if (access(full_path, F_OK) == 0)
-        {
-			return full_path;
-		}
-		token = strtok(NULL, ":");
-	}
-
-	free(full_path);
-	return NULL;
+	free(path);
+	return (NULL);
 }
