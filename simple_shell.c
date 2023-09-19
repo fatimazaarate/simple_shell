@@ -25,13 +25,15 @@ int main(int ac, char **argv)
 			return (stat);
 		}
 		idx++;
+
 		cmd = get_token(ln);
+
 		if (!cmd)
 			continue;
 
 
 		stat = execmd(cmd, argv, idx);
-	
+
 	}
 }
 

@@ -29,7 +29,7 @@ char *read_line(void);
 char **get_token(char *line);
 int execmd(char **cmd, char **argv, int ind);
 void free_cmd(char **cmd);
-char *_getenv(const char *name);
+char *_getenv(const char *var);
 char *_getpath(char *command);
 void _printerror(char *name, char *cmd, int ind);
 
