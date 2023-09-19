@@ -21,6 +21,21 @@ void free_cmd(char **cmd)
 	free(cmd), cmd = NULL;
 }
 
+void _printerror(char *name, char *cmd, int ind)
+{
+	char *ind;
+
+	ind = _itoi(ind)
+	write(STDERR_FILENO, name, _strlen(name));
+	write(STDERR_FILENO, ": ", 2));
+	write(STDERR_FILENO, ind, _strlen(ind));
+	write(STDERR_FILENO, ": ", 2));
+	write(STDERR_FILENO, cmd, _strlen(cmd));
+	write(STDERR_FILENO, mssg, _strlen(mssg));
+}
+
+
+
 /**
 * execmd - a function that executes commands
 * @cmd: command to be executed
@@ -31,23 +46,32 @@ void free_cmd(char **cmd)
 
 int execmd(char **cmd, char **argv)
 {
+	char *full_command;
 	pid_t ch;
 	int status;
+
+	full_command = _getpath(cmd[0]);
+	if (full_command == NULL)
+	{
+		_printerror();
+		free_cmd(cmd);
+		return(127);
+	}
 
 	ch = fork();
 	if (ch == 0)
 	{
-		if (execve(cmd[0], cmd, environ) == -1)
+		if (execve(full_command, cmd, environ) == -1)
 		{
-			perror(argv[0]);
+			free(full_command), full_command = NULL
 			free_cmd(cmd);
-			exit(0);
 		}
 	}
 	else
 	{
 		waitpid(ch, &status, 0);
 		free_cmd(cmd);
+		free(full_command), full_command = NULL
 	}
 	return (WEXITSTATUS(status));
 }

@@ -1,35 +1,31 @@
 #include "main.h"
 
 /**
- * _strdup - returns a pointer to a newly allocated space in memory,
- * which contains a copy of the string given as a parameter.
- * @str: string to duplicate
+ * _strdup - duplicate to new memory space location
+ * @str: char
  *
- * Return: pointer to duplicated string
- * or NULL if insufficient memory was available
-*/
-
+ * Return: 0
+ *
+ */
 char *_strdup(char *str)
 {
-	char *strdp;
-	unsigned int i, j;
+	char *dup;
+	int n, i;
 
-	if (str == 0)
-	return (NULL);
+	if (str == NULL)
+		return (NULL);
 
-	for (i = 0; str[i] != '\0'; i++)
-	{}
-	strdp = (char *) malloc(sizeof(char) * (i + 1));
+	n = strlen(str);
+	dup = (char *) malloc((n + 1) * sizeof(char));
 
-	if (strdp == 0)
-	return (NULL);
+	if (dup == NULL)
+		return (NULL);
 
-	for (j = 0; j < i; j++)
-	strdp[j] = str[j];
-
-	strdp[j] = '\0';
-
-	return (strdp);
+	for (i = 0; i < n; i++)
+	{
+		dup[i] = str[i];
+	}
+	return (dup);
 }
 
 int _strcmp(const char *s1, const char *s2)
@@ -87,4 +83,24 @@ char *_strcat(char *dest, const char *src)
 	}
 	*dest = '\0';
 	return (p);
+}
+
+char *_itoi(int n)
+{
+	std::string str = std::to_string(n);
+	char *cstr = new char[str.length() + 1];
+	strcpy(cstr, str.c_str());
+	return cstr;
+}
+
+void reverse_string(char *str, int len)
+{
+	char temp;
+
+	for (int i = 0; i < len / 2; i++)
+	{
+		temp = str[i];
+		str[i] = str[len - i - 1];
+		str[len - i - 1] = temp;
+	}
 }

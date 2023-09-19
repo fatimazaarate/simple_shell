@@ -6,29 +6,34 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-
+/**
+ * _strdup - duplicate to new memory space location
+ * @str: char
+ *
+ * Return: 0
+ *
+ */
 char *_strdup(char *str)
 {
-	char *strdp;
-	unsigned int i, j;
+	char *dup;
+	int n, i;
 
-	if (str == 0)
-	return (NULL);
+	if (str == NULL)
+		return (NULL);
 
-	for (i = 0; str[i] != '\0'; i++)
-	{}
-	strdp = (char *) malloc(sizeof(char) * (i + 1));
+	n = strlen(str);
+	dup = (char *) malloc((n + 1) * sizeof(char));
 
-	if (strdp == 0)
-	return (NULL);
+	if (dup == NULL)
+		return (NULL);
 
-	for (j = 0; j < i; j++)
-	strdp[j] = str[j];
-
-	strdp[j] = '\0';
-
-	return (strdp);
+	for (i = 0; i < n; i++)
+	{
+		dup[i] = str[i];
+	}
+	return (dup);
 }
+
 
 char *_getenv(const char *name)
 {
@@ -66,7 +71,7 @@ char *_getpath(char *command)
 		{
 			if (stat(command, &st) == 0)
 			return (_strdup(command));
-			return (NULL);
+		return (NULL);
 		}
 	}
 	if (!path)   /* to handle unset PATH */
@@ -95,9 +100,13 @@ int main(int ac,char **av)
 
 	path = _getpath(av[1]);
 	if (path)
+		{
 		printf("%s\n", path);
+		free(path);
+		}
 	else
 		printf("not ex");
+	free(path);
 
 	return 0;
 } 

@@ -10,8 +10,9 @@ char *_getpath(char *command)
 	
 		
 
-	if (path == NULL || full_path == NULL) {
-		return NULL;
+	if (path == NULL || full_path == NULL)
+	{
+		return (NULL);
 	}
 
 	for (i = 0; command[i]; i++) /*to handle absolute path /bin/ls */
@@ -20,7 +21,7 @@ char *_getpath(char *command)
 		{
 			if (stat(command, &st) == 0)
 			return (_strdup(command));
-			return (NULL);
+		return (NULL);
 		}
 	}
 	if (!path)   /* to handle unset PATH */
@@ -32,11 +33,11 @@ char *_getpath(char *command)
 		sprintf(full_path, "%s/%s", token, command);
 		if (access(full_path, F_OK) == 0)
         {
-			return full_path;
+			return (full_path);
 		}
 		token = strtok(NULL, ":");
 	}
 
-	free(full_path);
-	return NULL;
+	free(full_path) full_path = NULL;
+	return (NULL);
 }

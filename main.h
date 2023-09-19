@@ -20,6 +20,9 @@ int _strcmp(const char *s1, const char *s2);
 int _strlen(const char *s);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, const char *src);
+char *_itoi(int n);
+void reverse_string(char *str, int len);
+
 
 char *read_line(void);
 char **get_token(char *line);
