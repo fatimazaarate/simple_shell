@@ -28,16 +28,15 @@ void reverse_string(char *str, int len)
 	char tmp;
 	int i = 0, nd = len -1;
 
-	while (i < nd)
+	while  (i < nd)
 	{
 		tmp = str[i];
 		str[i] = str[nd];
 		str[nd] = tmp;
-		i++;
+	 i++;
 		nd--;
 	}
 
-	
 }
 
 char *_itoa(int n)
@@ -60,3 +59,18 @@ char *_itoa(int n)
 	return(_strdup(buffer));
 }
 
+void _printerror(char *name, char *cmd, int ind)
+{
+	char *idx;
+	char msg[] = ": not found\n";
+
+	idx = _itoa(ind);
+	write(STDERR_FILENO, name, _strlen(name));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, idx, _strlen(idx));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, cmd, _strlen(cmd));
+	write(STDERR_FILENO, msg, _strlen(msg));
+
+	free(idx);
+}

@@ -27,7 +27,6 @@ int main(int ac, char **argv)
 		idx++;
 
 		cmd = get_token(ln);
-
 		if (!cmd)
 			continue;
 

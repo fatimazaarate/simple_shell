@@ -1,27 +1,5 @@
 #include "main.h"
 
-int execmd(char **cmd, char **argv, int ind);
-
-
-
-
-void _printerror(char *name, char *cmd, int ind)
-{
-	char *idx;
-	char msg[] = ": not found\n";
-
-	idx = _itoa(ind);
-	write(STDERR_FILENO, name, _strlen(name));
-	write(STDERR_FILENO, ": ", 2);
-	write(STDERR_FILENO, idx, _strlen(idx));
-	write(STDERR_FILENO, ": ", 2);
-	write(STDERR_FILENO, cmd, _strlen(cmd));
-	write(STDERR_FILENO, msg, _strlen(msg));
-
-	free(idx);
-}
-
-
 
 /**
 * execmd - a function that executes commands

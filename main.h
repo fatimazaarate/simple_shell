@@ -27,11 +27,12 @@ void reverse_string(char *str, int len);
 
 char *read_line(void);
 char **get_token(char *line);
+void _printerror(char *name, char *cmd, int ind);
 int execmd(char **cmd, char **argv, int ind);
 void free_cmd(char **cmd);
 char *_getenv(const char *var);
 char *_getpath(char *command);
-void _printerror(char *name, char *cmd, int ind);
+
 
 
 #endif
