@@ -86,38 +86,46 @@ char *_getenv(const char *name)
 }
 
 
-char *_getpath(char *cmd)
+
+char *_getpath(char *command)
 {
-	char *path;
+	char *path = getenv("PATH");
 	char *token;
+	int i;
 	 struct stat st;
-	char *full_path;
+	char *full_path = malloc(sizeof(char) * (strlen(command) + 1 + 256));
+/* Assuming maximum path length of 256*/	
+		
 
+	if (path == NULL || full_path == NULL) {
+		return NULL;
+	}
 
-	path = _getenv("PATH");
+	for (i = 0; command[i]; i++) /*to handle absolute path /bin/ls */
+	{
+		if (command[i] == '/')
+		{
+			if (stat(command, &st) == 0)
+			return (_strdup(command));
+			return (NULL);
+		}
+	}
+	if (!path)   /* to handle unset PATH */
+		return (NULL);
 
 	token = strtok(path, ":");
 	while (token != NULL)
-    	{
-		full_path = malloc(_strlen(token) + _strlen(cmd) + 2);
-		if (full_path)
-		{
-			_strcpy(full_path, token);
-			_strcat(full_path, "/");
-			_strcat(full_path, cmd);
-			if (stat(full_path, &st) == 0)
-			{
-				free(path);
-				return (full_path);
-			}
-		free(full_path), full_path = NULL;
-		token = strtok(NULL, ":");
+    {
+		sprintf(full_path, "%s/%s", token, command);
+		if (access(full_path, F_OK) == 0)
+        {
+			return full_path;
 		}
+		token = strtok(NULL, ":");
 	}
 
-	free(path);
+	free(full_path);
 	return NULL;
-
 }
 
 int main(int ac,char **av)
