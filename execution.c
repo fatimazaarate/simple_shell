@@ -1,26 +1,9 @@
 #include "main.h"
 
 int execmd(char **cmd, char **argv, int ind);
-/**
-* free_cmd - a function to free the memory
-* @cmd: the memory to be freed
-*/
 
-void free_cmd(char **cmd)
-{
-	int j;
 
-	if (cmd == NULL)
-		return;
 
-	for (j = 0; cmd[j]; j++)
-	{
-		free(cmd[j]);
-		cmd[j] = NULL;
-	}
-
-	free(cmd), cmd = NULL;
-}
 
 void _printerror(char *name, char *cmd, int ind)
 {

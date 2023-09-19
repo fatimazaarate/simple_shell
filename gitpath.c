@@ -1,30 +1,43 @@
 #include "main.h"
 
+
 char *_getpath(char *command)
 {
-	char *path_env, *full_cmd, *dir;
-	struct  stat st;
+	char *path = getenv("PATH");
+	char *token;
+	int i;
+	 struct stat st;
+	char *full_path = malloc(sizeof(char) * (strlen(command) + 1 + 256));
+		
 
-	path_env = getenv("PATH");
-
-	dir = strtok(path_env, ":");
-	while (dir)
+	if (path == NULL || full_path == NULL)
 	{
-		full_cmd = malloc(_strlen(dir) + _strlen (command) + 2);
-		if (full_cmd)
+		return NULL;
+	}
+
+	for (i = 0; command[i]; i++) /*to handle absolute path /bin/ls */
+	{
+		if (command[i] == '/')
 		{
-			_strcpy(full_cmd, dir);
-			_strcat(full_cmd, "/");
-			_strcat(full_cmd, command);
-			if (stat(full_cmd, &st) ==0)
-			{
-				free(path_env);
-				return(full_cmd);
-			}
-			free(full_cmd), full_cmd =NULL;
-			dir = strtok(NULL, ":");
+			if (stat(command, &st) == 0)
+			return (_strdup(command));
+		return (NULL);
 		}
 	}
-	free(path_env);
-	return (NULL);
+	if (!path)   /* to handle unset PATH */
+		return (NULL);
+
+	token = strtok(path, ":");
+	while (token != NULL)
+    {
+		sprintf(full_path, "%s/%s", token, command);
+		if (access(full_path, F_OK) == 0)
+        {
+			return full_path;
+		}
+		token = strtok(NULL, ":");
+	}
+
+	free(full_path);
+	return NULL;
 }
