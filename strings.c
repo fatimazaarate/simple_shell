@@ -85,22 +85,39 @@ char *_strcat(char *dest, const char *src)
 	return (p);
 }
 
-char *_itoi(int n)
+char *_itoa(int n)
 {
-	std::string str = std::to_string(n);
-	char *cstr = new char[str.length() + 1];
-	strcpy(cstr, str.c_str());
-	return cstr;
+	char buffer [20];
+	int i = 0;
+
+	if (n == 0)
+		buffer[i++] = '0';
+	else
+	{
+		while (n > 0)
+		{
+			buffer[i++] = (n % 10) + '0';
+			n /= 10;
+		}
+	}
+	buffer[i] = '\0';
+	reverse_string(buffer, i);
+	return(_strdup(buffer));
 }
 
 void reverse_string(char *str, int len)
 {
-	char temp;
+	char tmp;
+	int i = 0, nd = len -1;
 
-	for (int i = 0; i < len / 2; i++)
+	while (i < nd)
 	{
-		temp = str[i];
-		str[i] = str[len - i - 1];
-		str[len - i - 1] = temp;
+		tmp = str[i];
+		str[i] = str[nd];
+		str[nd] = tmp;
+		i++;
+		nd--;
 	}
+
+	
 }

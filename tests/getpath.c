@@ -107,6 +107,5 @@ int main(int ac,char **av)
 	else
 		printf("not ex");
 	free(path);
-
-	return 0;
+		return 0;
 } 

@@ -12,7 +12,7 @@ int main(int ac, char **argv)
 {
 	char *ln = NULL;
 	char **cmd = NULL;
-	int stat = 0;
+	int stat = 0, idx = 0;
 	(void) ac;
 
 	while (1)
@@ -24,12 +24,13 @@ int main(int ac, char **argv)
 				write(STDERR_FILENO, "\n", 1);
 			return (stat);
 		}
+		idx++;
 		cmd = get_token(ln);
 		if (!cmd)
 			continue;
 
 
-		stat = execmd(cmd, argv);
+		stat = execmd(cmd, argv, idx);
 	}
 }
 

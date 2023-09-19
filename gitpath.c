@@ -1,4 +1,4 @@
-#include <main.h>
+#include "main.h"
 
 char *_getpath(char *command)
 {
@@ -6,13 +6,12 @@ char *_getpath(char *command)
 	char *token;
 	int i;
 	 struct stat st;
-	char *full_path = malloc(sizeof(char) * (strlen(command) + 1 + 256));  /* Assuming maximum path length of 256*/
-	
+	char *full_path = malloc(sizeof(char) * (strlen(command) + 1 + 256));
 		
 
 	if (path == NULL || full_path == NULL)
 	{
-		return (NULL);
+		return NULL;
 	}
 
 	for (i = 0; command[i]; i++) /*to handle absolute path /bin/ls */
@@ -33,11 +32,11 @@ char *_getpath(char *command)
 		sprintf(full_path, "%s/%s", token, command);
 		if (access(full_path, F_OK) == 0)
         {
-			return (full_path);
+			return full_path;
 		}
 		token = strtok(NULL, ":");
 	}
 
-	free(full_path) full_path = NULL;
-	return (NULL);
+	free(full_path);
+	return NULL;
 }

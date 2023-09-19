@@ -1,5 +1,6 @@
 #include "main.h"
 
+int execmd(char **cmd, char **argv, int ind);
 /**
 * free_cmd - a function to free the memory
 * @cmd: the memory to be freed
@@ -23,16 +24,18 @@ void free_cmd(char **cmd)
 
 void _printerror(char *name, char *cmd, int ind)
 {
-	char *ind;
-	char msg;
+	char *idx;
+	char msg[] = ": not found\n";
 
-	ind = _itoi(ind)
+	idx = _itoa(ind);
 	write(STDERR_FILENO, name, _strlen(name));
-	write(STDERR_FILENO, ": ", 2));
-	write(STDERR_FILENO, ind, _strlen(ind));
-	write(STDERR_FILENO, ": ", 2));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, idx, _strlen(idx));
+	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, cmd, _strlen(cmd));
 	write(STDERR_FILENO, msg, _strlen(msg));
+
+	free(idx);
 }
 
 
@@ -45,18 +48,18 @@ void _printerror(char *name, char *cmd, int ind)
 * Return: exit status of the executed command
 */
 
-int execmd(char **cmd, char **argv)
+int execmd(char **cmd, char **argv, int ind)
 {
 	char *full_command;
 	pid_t ch;
 	int status;
 
 	full_command = _getpath(cmd[0]);
-	if (full_command == NULL)
+	if (!full_command)
 	{
-		_printerror();
+		_printerror(argv[0], cmd[0], ind);
 		free_cmd(cmd);
-		return(127);
+		return (127);
 	}
 
 	ch = fork();
@@ -64,7 +67,7 @@ int execmd(char **cmd, char **argv)
 	{
 		if (execve(full_command, cmd, environ) == -1)
 		{
-			free(full_command), full_command = NULL
+			free(full_command), full_command = NULL;
 			free_cmd(cmd);
 		}
 	}
@@ -72,7 +75,7 @@ int execmd(char **cmd, char **argv)
 	{
 		waitpid(ch, &status, 0);
 		free_cmd(cmd);
-		free(full_command), full_command = NULL
+		free(full_command), full_command = NULL;
 	}
 	return (WEXITSTATUS(status));
 }
