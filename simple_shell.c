@@ -31,6 +31,7 @@ int main(int ac, char **argv)
 
 
 		stat = execmd(cmd, argv, idx);
+	
 	}
 }
 
