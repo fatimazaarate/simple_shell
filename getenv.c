@@ -1,10 +1,21 @@
 #include "main.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <string.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <sys/stat.h>
 
 char *_getenv(char *name)
 {
 	char *tmp, *ky, *val, *env;
 	int i = 0;
+
+	extern char **environ;
 
 	while (environ[i])
 	{

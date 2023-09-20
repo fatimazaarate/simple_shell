@@ -14,6 +14,7 @@ int execmd(char **cmd, char **argv, int ind)
 	char *full_command;
 	pid_t ch;
 	int status;
+	extern char **environ;
 
 	full_command = _getpath(cmd[0]);
 	if (!full_command)
