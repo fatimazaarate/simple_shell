@@ -12,7 +12,8 @@ int main(int ac, char **argv)
 {
 	char *ln = NULL;
 	char **cmd = NULL;
-	int stat = 0, idx = 0;
+	int stat = 0;
+
 	(void) ac;
 
 	while (1)
@@ -21,18 +22,16 @@ int main(int ac, char **argv)
 		if (ln == NULL)
 		{
 			if (isatty(STDIN_FILENO))
-				write(STDOUT_FILENO, "\n", 1);
-			free(ln), ln = NULL;
+				write(STDERR_FILENO, "\n", 1);
 			return (stat);
 		}
-		idx++;
 		cmd = get_token(ln);
 		if (!cmd)
 			continue;
 
-
-		stat = execmd(cmd, argv, idx);
-	
+		if (cmd_blt_in(cmd[0]))
+			bltin_handle(cmd, stat);
+		else
+			stat = execmd(cmd, argv);
 	}
 }
-

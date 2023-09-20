@@ -1,5 +1,25 @@
 #include "main.h"
 
+/**
+* free_cmd - a function to free the memory
+* @cmd: the memory to be freed
+*/
+
+void free_cmd(char **cmd)
+{
+	int j;
+
+	if (cmd == NULL)
+		return;
+
+	for (j = 0; cmd[j]; j++)
+	{
+		free(cmd[j]);
+		cmd[j] = NULL;
+	}
+
+	free(cmd), cmd = NULL;
+}
 
 /**
 * execmd - a function that executes commands
@@ -9,36 +29,25 @@
 * Return: exit status of the executed command
 */
 
-int execmd(char **cmd, char **argv, int ind)
+int execmd(char **cmd, char **argv)
 {
-	char *full_command;
 	pid_t ch;
 	int status;
-	extern char **environ;
-
-	full_command = _getpath(cmd[0]);
-	if (!full_command)
-	{
-		p_error(argv[0], cmd[0], ind);
-		free_cmd(cmd);
-		free(full_command), full_command = NULL;
-		return (127);
-	}
 
 	ch = fork();
 	if (ch == 0)
 	{
-		if (execve(full_command, cmd, environ) == -1)
+		if (execve(cmd[0], cmd, environ) == -1)
 		{
-			free(full_command), full_command = NULL;
+			perror(argv[0]);
 			free_cmd(cmd);
+			exit(0);
 		}
 	}
 	else
 	{
 		waitpid(ch, &status, 0);
 		free_cmd(cmd);
-		free(full_command), full_command = NULL;
 	}
 	return (WEXITSTATUS(status));
 }

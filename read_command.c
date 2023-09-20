@@ -13,13 +13,13 @@ char *read_line(void)
 	ssize_t chars_read;
 	char *shell = "Shell>$ ";
 
-	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, shell, strlen(shell));
+	if (isatty(STDIN_FILENO == 1))
+		write(STDOUT_FILENO, shell, _strlen(shell));
 
 	chars_read = getline(&cmd, &n, stdin);
 	if (chars_read == -1)
 	{
-		free(cmd), cmd = NULL;
+		free(cmd);
 		return (NULL);
 	}
 	return (cmd);
